@@ -1,20 +1,17 @@
-import React from 'react'
-import {useState} from 'react'
+import React, { useState } from 'react'
 
-export default function Login({dispatch}) {
-	const [user, setUser] = useState('')
-	function processUser(evt){ setUser(evt.target.vualue)}
+export default function Login({ dispatch }) {
+    const [ username, setUsername ] = useState('')
+    function handleUsername (evt) { setUsername(evt.target.value) }
+
     return (
-	    <form onSubmit={
-			evt => {evt.preventDefault();
-			dispatch({type: "LOGIN", user})}
-		}>
-		
-	    <label htmlFor="login-username">User Name:</label>
-	    <input type="text" name="login-username" id="login-username" value={user} onChange={processUser} />
-	    <label htmlFor="login-password">Password:</label>
-	    <input type="password" name="login-userid" id="login-password" />
-        <input type="submit" value="Login" disable={user.length === 0} />
-	    </form>
+        <form onSubmit={e => { e.preventDefault(); dispatch({type: "LOGIN", username}) }}>
+        <label htmlFor="login-username">Username:</label>
+        <input type="text" value={username} onChange={handleUsername} name="login-username" id="login-username" />
+        <label htmlFor="login-password">Password:</label>
+        <input type="password" name="login-password" id="login-password" />
+        <input type="submit" value="Login" disabled={username.length === 0} />
+        </form>
     )
 }
+    

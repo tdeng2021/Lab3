@@ -51,5 +51,3 @@ function userReducer(state, action) {
       todos: todoReducer(state.todos, action),
     };
   }
-
-  //test commit fresh

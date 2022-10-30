@@ -1,11 +1,12 @@
-import React from 'react'
-import Logout from './Logout'
+
 import Login from './Login'
+import Logout from './Logout'
 import Register from './Register'
 
 export default function UserBar({user, dispatch}) {
+    
 
-	if (user) { 
+    if (user) { 
         return <Logout user={user} dispatch={dispatch} /> }
     else {
         return (
@@ -14,20 +15,5 @@ export default function UserBar({user, dispatch}) {
         <Register dispatch={dispatch} />
         </>
         )
-		}
-
-    //const username = ''
-
-    //if (username) {
-	//return <Logout username={username} />
-    //}
-
-    //else {
-	//return (
-	//    <>
-	//	<Login />
-	//	<Register />
-	//	</>
-	//)
-    
+    }
 }
