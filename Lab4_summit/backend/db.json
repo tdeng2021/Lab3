@@ -1,0 +1,27 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "code",
+      "content": "web application",
+      "author": "ting"
+    },
+    {
+      "id": 2,
+      "title": "only update this",
+      "content": "pandas",
+      "author": "ting"
+    },
+    {
+      "title": "update to clear",
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "email": "ting@test.com",
+      "password": "$2a$10$hOKz2FLifS2Fz8PC7woHwe7sjK28k84FiRxQPPXR0W.BW1l07Nrz6",
+      "id": 1
+    }
+  ]
+}
