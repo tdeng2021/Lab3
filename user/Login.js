@@ -1,17 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from "react";
 
-export default function Login({ dispatch }) {
-    const [ username, setUsername ] = useState('')
-    function handleUsername (evt) { setUsername(evt.target.value) }
+import { StateContext } from "../contexts";
 
-    return (
-        <form onSubmit={e => { e.preventDefault(); dispatch({type: "LOGIN", username}) }}>
-        <label htmlFor="login-username">Username:</label>
-        <input type="text" value={username} onChange={handleUsername} name="login-username" id="login-username" />
-        <label htmlFor="login-password">Password:</label>
-        <input type="password" name="login-password" id="login-password" />
-        <input type="submit" value="Login" disabled={username.length === 0} />
-        </form>
-    )
+export default function Login() {
+  const [username, setUsername] = useState("");
+  const { dispatch } = useContext(StateContext);
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        dispatch({ type: "LOGIN", username });
+      }}
+    >
+      <label htmlFor="login-username">Username:</label>
+      <input
+        type="text"
+        value={username}
+        onChange={(event) => setUsername(event.target.value)}
+        name="login-username"
+        id="login-username"
+      />
+      <label htmlFor="login-password">Password:</label>
+      <input type="password" name="login-password" id="login-password" />
+      <input type="submit" value="Login" disabled={username.length === 0} />
+    </form>
+  );
 }
-    

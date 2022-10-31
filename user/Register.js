@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
-export default function Register({ dispatch }) {
+import { StateContext } from "../contexts";
+
+export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
-  function handleUsername(evt) {
-    setUsername(evt.target.value);
-  }
-  function handlePassword(evt) {
-    setPassword(evt.target.value);
-  }
-  function handlePasswordRepeat(evt) {
-    setPasswordRepeat(evt.target.value);
-  }
+
+  const { dispatch } = useContext(StateContext);
+
+  //  function handleUsername(evt) {
+  //    setUsername(evt.target.value);
+  //  }
+  //  function handlePassword(evt) {
+  //    setPassword(evt.target.value);
+  //  }
+  //  function handlePasswordRepeat(evt) {
+  //    setPasswordRepeat(evt.target.value);
+  //  }
   return (
     <form
       onSubmit={(e) => {
@@ -24,7 +29,7 @@ export default function Register({ dispatch }) {
       <input
         type="text"
         value={username}
-        onChange={handleUsername}
+        onChange={(event) => setUsername(event.target.value)}
         name="register-username"
         id="register-username"
       />
@@ -34,7 +39,7 @@ export default function Register({ dispatch }) {
         name="register-password"
         id="register-password"
         value={password}
-        onChange={handlePassword}
+        onChange={(event) => setPassword(event.target.value)}
       />
       <label htmlFor="register-password-repeat">Repeat password:</label>
       <input
@@ -42,7 +47,7 @@ export default function Register({ dispatch }) {
         name="register-password-repeat"
         id="register-password-repeat"
         value={passwordRepeat}
-        onChange={handlePasswordRepeat}
+        onChange={(event) => setPasswordRepeat(event.target.value)}
       />
       <input
         type="submit"

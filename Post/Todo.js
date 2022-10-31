@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const timeNow = new Date(Date.now()).toString();
+const curTime = new Date().toDateString();
 export default function Todo({ title, content, author, dispatch }) {
   const [complete, setComplete] = useState(false);
 
@@ -10,7 +10,7 @@ export default function Todo({ title, content, author, dispatch }) {
       <div>{content}</div>
       <br />
       <i>Written by: {author} </i>
-      <div>Created on: {timeNow}</div>
+      <div>Created on: {curTime}</div>
       <div>
         <label id={title}></label>
 

@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export default function CreateTodo({ user, todos, dispatch }) {
+import { StateContext } from "../contexts";
+
+export default function CreateTodo() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const { state, dispatch } = useContext(StateContext);
+  const { user } = state;
 
   return (
     <form
@@ -36,6 +41,7 @@ export default function CreateTodo({ user, todos, dispatch }) {
         value={content}
         onChange={(event) => setContent(event.target.value)}
       />
+
       <input type="submit" value="Create" />
     </form>
   );

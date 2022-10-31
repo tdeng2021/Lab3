@@ -3,6 +3,7 @@ import CreatePost from "./Post/CreateTodo";
 import PostList from "./Post/TodoList";
 import UserBar from "./user/UserBar";
 import appReducer from "./reducer";
+import { StateContext } from "./contexts";
 
 function App() {
   const initalTodos = [];
@@ -16,13 +17,17 @@ function App() {
 
   //const [todos, setTodos] = useState(initalTodos);
 
+  document.title = "Todo";
+
   return (
     <div>
-      <UserBar user={state.user} dispatch={dispatch} />
-      <PostList todos={state.todos} />
-      {state.user && (
-        <CreatePost user={state.user} todos={state.todos} dispatch={dispatch} />
-      )}
+      <StateContext.Provider value={{ state, dispatch }}>
+        <h1>Todo List</h1>
+
+        <UserBar />
+        <PostList />
+        {state.user && <CreatePost />}
+      </StateContext.Provider>
     </div>
   );
 }
