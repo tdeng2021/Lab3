@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useResource } from "react-request-hook";
 
 import { StateContext } from "../contexts";
 
@@ -9,6 +10,17 @@ export default function CreateTodo() {
 
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
+
+  const [todos, createTodo] = useResource(({ title, content, author }) => ({
+    url: "/todos",
+    method: "post",
+    data: { title, content, author },
+  }));
+
+  function handleCreate() {
+    createTodo({ title, content, author: user });
+    dispatch({ type: "CREATE_TODO", title, content, author: user });
+  }
 
   return (
     <form

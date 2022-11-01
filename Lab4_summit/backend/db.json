@@ -22,6 +22,11 @@
       "email": "ting@test.com",
       "password": "$2a$10$hOKz2FLifS2Fz8PC7woHwe7sjK28k84FiRxQPPXR0W.BW1l07Nrz6",
       "id": 1
+    },
+    {
+      "email": "aa@giam.com",
+      "password": "$2a$10$m0fAV5Lq7p/gnD7CBbrD0Ogo9xOC35J7Nt6A31DypxlRmyN1gx7Sq",
+      "id": 2
     }
   ]
 }

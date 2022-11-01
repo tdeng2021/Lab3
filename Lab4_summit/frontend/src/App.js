@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import CreatePost from "./Post/CreateTodo";
 import PostList from "./Post/TodoList";
 import UserBar from "./user/UserBar";
@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     if (todos && todos.data) {
-      dispatch({ type: "FETCH_POSTS", todos: todos.data.reverse() });
+      dispatch({ type: "FETCH_TODOS", todos: todos.data.reverse() });
     }
   }, [todos]);
 
