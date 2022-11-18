@@ -1,38 +1,56 @@
-import { useState, useContext } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useState, useContext, useEffect } from "react";
+import { StateContext } from "../Contexts";
 import { useResource } from "react-request-hook";
-
-import { StateContext } from "../contexts";
 
 export default function CreateTodo() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [description, setDescription] = useState("");
+  const date = new Date();
 
   const { state, dispatch } = useContext(StateContext);
   const { user } = state;
 
-  const [todos, createTodo] = useResource(({ title, content, author }) => ({
-    url: "/todos",
-    method: "post",
-    data: { title, content, author },
-  }));
+  const [todo, createTodo] = useResource(
+    ({ title, description, author, complete, dateCreated, dateCompleted }) => ({
+      url: "/todos",
+      method: "post",
+      data: {
+        title,
+        description,
+        author,
+        complete,
+        dateCreated,
+        dateCompleted,
+      },
+    })
+  );
 
-  function handleCreate() {
-    createTodo({ title, content, author: user });
-    dispatch({ type: "CREATE_TODO", title, content, author: user });
-  }
+  useEffect(() => {
+    if (todo && todo.isLoading === false && todo.data) {
+      dispatch({
+        type: "CREATE_TODO",
+        id: todo.data.id,
+        title: todo.data.title,
+        description: todo.data.description,
+        author: todo.data.author,
+        dateCreated: todo.data.dateCreated,
+        complete: todo.data.complete,
+        dateCompleted: todo.data.dateCompleted,
+      });
+    }
+  }, [todo]);
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        dispatch({
-          type: "CREATE_TODO",
+        createTodo({
           title,
-          content,
+          description,
           author: user,
-          id: uuidv4(),
-          dispatch,
+          complete: false,
+          dateCreated: date.toDateString(),
+          dateCompleted: "Not complete",
         });
       }}
     >
@@ -49,12 +67,12 @@ export default function CreateTodo() {
           onChange={(event) => setTitle(event.target.value)}
         />
       </div>
+      <label>Description:</label>
       <textarea
-        value={content}
-        onChange={(event) => setContent(event.target.value)}
+        value={description}
+        onChange={(event) => setDescription(event.target.value)}
       />
-
-      <input type="submit" value="Create" />
+      <input type="submit" value="Create" disabled={title.length === 0} />
     </form>
   );
 }
